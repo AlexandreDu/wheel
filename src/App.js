@@ -11,6 +11,7 @@ import { InputText } from './components/formComponents';
 import { gsap, Linear, Elastic } from 'gsap';
 import { getRandomInteger } from './utils/getRandomInteger';
 import { PlayersList } from './components/list/PlayersList';
+import { v4 as uuid } from 'uuid';
 
 function App() {
   console.log('render')
@@ -26,11 +27,7 @@ function App() {
   
   const refs = useRef({wheelRef, radiusesRef, pikeRef})
 
-  
-
-
   const { handleSubmit, reset, control, formState: { errors } } = useForm()
-  
   
   const [players, setPlayers] = useState([])
 
@@ -47,10 +44,11 @@ function App() {
 
 
   const handleAdd = (data) => {
-
-    let newPlayer = Object.values(data)
+  
+    const name = Object.values(data)[0]
+    const id = uuid()
    
-    setPlayers([...players, newPlayer])
+    setPlayers([...players, {name, id}])
 
     reset()
 
@@ -61,13 +59,12 @@ function App() {
   }
 
   const handleRemovePlayer = (index) => {
-    console.log('handle remove index: ', index)
-    console.log('players: ', players)
+
     let playersCopy = [...players]
     playersCopy.splice(index, 1)
     console.log('playersCopy: ', playersCopy)
     setPlayers(playersCopy)
-    // setPlayers([])
+
   }
 
   const [random, setRandom] = useState(null)
@@ -111,16 +108,29 @@ function App() {
       duration: 0.75
     }, '>')
 
+
     wheelTl.current.to(wheel, {
       rotation: '+=360',
       ease:Linear.easeNone,
-      duration: 1
+      duration: 1.5
     }, '>')
 
     wheelTl.current.to(wheel, {
       rotation: '+=360',
       ease:Linear.easeNone,
-      duration: 2
+      duration: 2.5
+    }, '>')
+
+    wheelTl.current.to(wheel, {
+      rotation: '+=360',
+      ease:Linear.easeNone,
+      duration: 3.5
+    }, '>')
+
+    wheelTl.current.to(wheel, {
+      rotation: '+=360',
+      ease:Linear.easeNone,
+      duration: 5.5
     }, '>')
 
  
@@ -143,13 +153,6 @@ function App() {
     }, '>')
 
     
-
-    // wheelTl.current.to(wheel, {
-    //   rotation: '+=360',
-    //   ease:Linear.easeNone,
-    //   repeat:10,
-    // })
-
 
     wheelTl.current.reverse()
     console.log('tl duration: ', wheelTl.current.duration())
@@ -179,12 +182,11 @@ function App() {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{padding: '1.5rem', backgroundColor: theme.palette.primary.main, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+      <Box sx={{padding: '1.5rem', backgroundColor: theme.palette.primary.main, height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
 
-        <Box sx={{margin: '0 auto', width: {xs: '90%', md: '50%'}, display: 'flex', flexDirection: 'column',  alignItems: 'center', height: '80vh'}}>
-          <Box sx={{ }}>
+        <Box sx={{ width: {xs: '90%', md: '50%'}, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
+          <Box>
             <Wheel players={players} ref={refs} />
-            
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
               <Button onClick={handleClearplayers}>
                 <Stack>
@@ -205,7 +207,7 @@ function App() {
             </Box>
 
           </Box>
-          <Box flexGrow={2} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
+          <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
             <Box sx={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row'}}>
               <InputText 
                 control={control}
@@ -219,26 +221,23 @@ function App() {
               />
               <Button onClick={handleSubmit(handleAdd)}>
                 <IconButton>
-                  <AddCircleOutlineIcon />
+                  <AddCircleOutlineIcon sx={{color: 'white'}} />
                 </IconButton>
               </Button>
             </Box>
-            <Box sx={{}}>
-              <PlayersList players={players} handleRemovePlayer={handleRemovePlayer} />
-            </Box>
-            
             {winner && (
               <>
                 <Typography>The winner is : {winner}</Typography>
               </>
             )}
-        </Box> 
+          </Box> 
+        </Box>
         
-        
+        <Box sx={{height: '80%', width: {xs: '90%', sm: '50%', md: '30%'}, overflow: 'auto'}}>
+              <PlayersList players={players} handleRemovePlayer={handleRemovePlayer} />
+        </Box>
       </Box>
-      
-    </Box>
-  </ThemeProvider>
+    </ThemeProvider>
  
 
   

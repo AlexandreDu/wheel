@@ -3,6 +3,7 @@ import { Radiuses } from "./children/Radiuses";
 import { Box, useTheme } from "@mui/material";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 export const Wheel = React.forwardRef(({players}, ref) => {
 
@@ -46,8 +47,8 @@ let innerCircleDimension = 3
                 ref={wheelRef} 
                 sx={{
                     position: 'relative', 
-                    width: {xs: '15rem', md: '20rem'}, 
-                    height: {xs: '15rem', md: '20rem'}, 
+                    width: {xs: '16rem', md: '20rem'}, 
+                    height: {xs: '16rem', md: '20rem'}, 
                     borderRadius: '50%', 
                     backgroundColor: theme.palette.secondary.main, 
                     overflow: 'hidden',
@@ -55,7 +56,11 @@ let innerCircleDimension = 3
                     boxShadow: '0.2rem 0.1rem 0 0'
                 }}>
                     {/* inner circle */}
-                <Box sx={{position: 'absolute', top: `calc(50% - ${innerCircleDimension/2}rem)`, left: `calc(50% - ${innerCircleDimension/2}rem)`, borderRadius: '50%', width: `${innerCircleDimension}rem`, height: `${innerCircleDimension}rem`, backgroundColor: 'white'}}>
+                <Box 
+                    sx={{
+                        position: 'absolute', top: `calc(50% - ${innerCircleDimension/2}rem)`, left: `calc(50% - ${innerCircleDimension/2}rem)`, borderRadius: '50%', width: `${innerCircleDimension}rem`, height: `${innerCircleDimension}rem`, backgroundColor: 'white'
+                    }}
+                >
                 </Box>
                 {wheelRadiuses.map(({participant, startRadius, endRadius}, index) => {
           
@@ -69,8 +74,6 @@ let innerCircleDimension = 3
                                 endRadius={endRadius}
                                
                             />
-                            
-                    
                     )
                 })}
                  

@@ -7,7 +7,7 @@ import { ErrorMessage } from './errorMessage'
 
 export const InputText = ({control, name, label, rules}) => {
 
-
+   
 
 
     return (
@@ -19,7 +19,20 @@ export const InputText = ({control, name, label, rules}) => {
             render={({
                 field: {onChange, value},
                 fieldState: { invalid, isTouched, isDirty, error }
-            }) => (
+            }) => {
+
+                let inputProps = {
+                    onChange,
+            
+                    value: value,
+                    required: true,
+                    label,
+                    type: 'email',
+                    margin: 'normal',
+             
+                }
+                
+                return (
                 <>
                     <TextField
                         onChange={onChange}
@@ -28,10 +41,11 @@ export const InputText = ({control, name, label, rules}) => {
                         label={label}
                         type='email'
                         margin='normal'
+                        inputProps={inputProps}
                     />
                     <ErrorMessage error={error} />
                 </>
-        )}
+        )}}
         />
     )
 }

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Box, Typography } from "@mui/material";
 // container, circle, radius
-export const Radiuses = React.forwardRef(({participant, startRadius, endRadius}, ref) => {
+export const Radiuses = React.forwardRef(({participant: {name}, startRadius, endRadius}, ref) => {
 
    
     
@@ -22,7 +22,7 @@ export const Radiuses = React.forwardRef(({participant, startRadius, endRadius},
                 {startRadius !== null && (
                     <Box sx={{position: 'absolute', top: '50%', left: '50%', transformOrigin: 'left center', transform: `rotate(${startRadius}deg)`, width: '50%', height: radiusHeight, backgroundColor: 'white'}}></Box>
                 )}
-                <Box ref={ref} sx={{position: 'absolute', top: '50%', left: '50%', transformOrigin: 'left center', transform: `rotate(${textRadius}deg)`, paddingLeft: textRadius !== 0 && '20%', width: '25%', height: '4px', color:'green'}}><Typography>{participant}</Typography></Box>
+                <Box ref={ref} sx={{position: 'absolute', top: '50%', left: '50%', transformOrigin: 'top left',  transform: `rotate(${textRadius}deg) translate(50%, -50%)`, width: '25%', color:'green'}}><Typography>{name}</Typography></Box>
 
                 {endRadius !== null && (
                     <Box sx={{position: 'absolute', top: '50%', left: '50%', transformOrigin: 'left center', transform: `rotate(${endRadius})`, width: '50%', height: radiusHeight, backgroundColor: 'white'}}></Box>
