@@ -81,7 +81,7 @@ function App() {
  
 
   useEffect(() => {
-    console.log('random in useEffect: ', random)
+   
     let wheel = wheelRef.current
     let pike = pikeRef.current
     let radiuses = radiusesRef.current
@@ -155,7 +155,7 @@ function App() {
     
 
     wheelTl.current.reverse()
-    console.log('tl duration: ', wheelTl.current.duration())
+
 
     wheelTl.current.eventCallback('onComplete', () => {
     
@@ -171,7 +171,7 @@ function App() {
  
     const index = bottomValues.indexOf(max)
 
-    setWinner(players[index])
+    setWinner(players[index].name)
    
     })
 
