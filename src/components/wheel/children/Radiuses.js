@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Box, Typography } from "@mui/material";
+import { CSSTransition } from "react-transition-group";
 // container, circle, radius
 export const Radiuses = React.forwardRef(({participant: {name}, startRadius, endRadius}, ref) => {
 
