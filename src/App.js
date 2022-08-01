@@ -157,23 +157,23 @@ function App() {
     wheelTl.current.reverse()
     console.log('tl duration: ', wheelTl.current.duration())
 
-    // wheelTl.current.eventCallback('onComplete', () => {
-    //   console.log('onComplete')
+    wheelTl.current.eventCallback('onComplete', () => {
+    
    
 
-    //  let bottomValues = radiusesRef.current.map(radius => {
+     let bottomValues = radiusesRef.current.map(radius => {
 
-    //   return radius.getBoundingClientRect().bottom
-    // })
+      return radius.getBoundingClientRect().bottom
+    })
 
  
-    // const max = Math.max(...bottomValues)
+    const max = Math.max(...bottomValues)
  
-    // const index = bottomValues.indexOf(max)
+    const index = bottomValues.indexOf(max)
 
-    // setWinner(players[index])
-    //   // setToggle((prevState) =>!prevState)
-    // })
+    setWinner(players[index])
+   
+    })
 
 
     return () => wheelTl.current.kill()
