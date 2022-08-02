@@ -21,9 +21,15 @@ let customTheme = createTheme({
   },
   typography: {
     allVariants: {
-      color: '#fafafa'
+      color: '#fafafa',
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ].join(',')
     }
   },
+
+
   
   transitions: {
     duration: {

@@ -3,7 +3,6 @@ import { Radiuses } from "./children/Radiuses";
 import { Box, useTheme } from "@mui/material";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
-import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 export const Wheel = React.forwardRef(({players}, ref) => {
 

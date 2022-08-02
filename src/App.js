@@ -1,18 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
-import { Button, IconButton, Stack, Box, Typography, ThemeProvider, useTheme  } from '@mui/material';
+import { Box, Typography, ThemeProvider, useTheme } from '@mui/material';
 import customTheme from './theme/customTheme';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { Wheel } from './components/wheel';
-import { useForm, Controller } from 'react-hook-form'
+import { IconAndButton } from './components/buttons/IconAndButton';
 import { InputText } from './components/formComponents';
+import { PlayersList } from './components/list/PlayersList';
+import { WinnerDialog } from './components/dialog/winnerDialog';
+import { useForm } from 'react-hook-form'
 import { gsap, Linear, Elastic } from 'gsap';
 import { getRandomInteger } from './utils/getRandomInteger';
-import { PlayersList } from './components/list/PlayersList';
 import { v4 as uuid } from 'uuid';
-import { IconAndButton } from './components/buttons/IconAndButton';
+
 
 function App() {
  
@@ -35,7 +37,8 @@ function App() {
   const [isSpinning, setIsSpinning] = useState(false)
 
   const[winner, setWinner] = useState(null)
- 
+  
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   useEffect(() => {
       radiusesRef.current = radiusesRef.current.slice(0, players.length) 
@@ -65,7 +68,7 @@ function App() {
 
     let playersCopy = [...players]
     playersCopy.splice(index, 1)
-    console.log('playersCopy: ', playersCopy)
+    
     setPlayers(playersCopy)
 
   }
@@ -84,12 +87,18 @@ function App() {
   }, [random])
 
  
+  useEffect(() => {
+
+    if(!winner) return
+  
+    setIsDialogOpen(true)
+
+  }, [winner])
 
   useEffect(() => {
    
     let wheel = wheelRef.current
-    let pike = pikeRef.current
-    let radiuses = radiusesRef.current
+   
     
     wheelTl.current = gsap.timeline()
 
@@ -140,7 +149,7 @@ function App() {
 
  
     let finalRotation = random || 0
-    console.log('finalRotation: ', finalRotation)
+   
     let finalDuration = 8
     if(finalRotation < 300) finalDuration = 6
     if(finalRotation < 240) finalDuration = 4
@@ -163,8 +172,6 @@ function App() {
 
 
     wheelTl.current.eventCallback('onComplete', () => {
-    
-   
 
      let bottomValues = radiusesRef.current.map(radius => {
 
@@ -177,6 +184,7 @@ function App() {
     const index = bottomValues.indexOf(max)
     setIsSpinning(false)
     setWinner(players[index].name)
+    
    
     })
 
@@ -194,11 +202,20 @@ function App() {
           <Box>
             <Wheel players={players} ref={refs} />
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
-
-              <IconAndButton onClick={handleClearplayers} disabled={notEnoughPlayer || isSpinning} title={'Restart'} icon={<RestartAltIcon sx={{color: 'white'}} />}/>
-              
-              <IconAndButton onClick={handleRandom} disabled={notEnoughPlayer || isSpinning} title={'Play'} icon={<PlayCircleIcon sx={{color: 'white'}} />}/>
-              
+              <IconAndButton 
+                onClick={handleClearplayers} 
+                disabled={notEnoughPlayer || isSpinning} 
+                title={'Reset'} 
+                icon={<RestartAltIcon 
+                sx={{color: 'white'}} />}
+              />
+              <IconAndButton 
+                onClick={handleRandom} 
+                disabled={notEnoughPlayer || isSpinning} 
+                title={'Play'} 
+                icon={<PlayCircleIcon 
+                sx={{color: 'white'}} />}
+              />
             </Box>
           </Box>
           <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
@@ -209,30 +226,23 @@ function App() {
                 label='Add a new participant'
                 rules={{ validate: {
                   required: (value) => value.length > 0 || 'Name of the participant required',
-                  // mustIncludeAt: (value) => value.includes('@') || 'Your email must include @',
                   }
                 }}
               />
               <IconAndButton onClick={handleSubmit(handleAdd)} icon={<AddCircleOutlineIcon sx={{color: 'white'}} />}/>
-              
             </Box>
-            {winner && (
-              <>
-                <Typography>The winner is : {winner}</Typography>
-              </>
-            )}
           </Box> 
         </Box>
-        
         <Box sx={{height: '80%', width: {xs: '90%', sm: '50%', md: '30%'}, overflow: 'auto'}}>
               <PlayersList players={players} handleRemovePlayer={handleRemovePlayer} />
         </Box>
       </Box>
+      <WinnerDialog 
+        isDialogOpen={isDialogOpen}
+        setIsDialogOpen={setIsDialogOpen}
+        winner={winner} 
+      />
     </ThemeProvider>
- 
-
-  
-    
   );
 }
 

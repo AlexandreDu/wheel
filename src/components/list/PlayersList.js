@@ -6,14 +6,9 @@ import { ellipsis } from "../../utils/ellipsis";
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 
-
-
-
-  
-
 export const PlayersList = ({ players, handleRemovePlayer }) => {
 
-   console.log(players)
+   
 
   const visibleStyles = {
     opacity: 1,
