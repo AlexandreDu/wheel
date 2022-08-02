@@ -12,9 +12,10 @@ import { gsap, Linear, Elastic } from 'gsap';
 import { getRandomInteger } from './utils/getRandomInteger';
 import { PlayersList } from './components/list/PlayersList';
 import { v4 as uuid } from 'uuid';
+import { IconAndButton } from './components/buttons/IconAndButton';
 
 function App() {
-  console.log('render')
+ 
   
   const theme  = useTheme()
 
@@ -30,6 +31,8 @@ function App() {
   const { handleSubmit, reset, control, formState: { errors } } = useForm()
   
   const [players, setPlayers] = useState([])
+
+  const [isSpinning, setIsSpinning] = useState(false)
 
   const[winner, setWinner] = useState(null)
  
@@ -71,6 +74,8 @@ function App() {
 
 
   const handleRandom = () => {
+    setWinner(null)
+    setIsSpinning(true)
     setRandom(getRandomInteger(360))
   }
 
@@ -170,7 +175,7 @@ function App() {
     const max = Math.max(...bottomValues)
  
     const index = bottomValues.indexOf(max)
-
+    setIsSpinning(false)
     setWinner(players[index].name)
    
     })
@@ -180,32 +185,21 @@ function App() {
 
   }, [players, players.length, random])
 
+  let notEnoughPlayer = players.length <= 1
+
   return (
     <ThemeProvider theme={customTheme}>
       <Box sx={{padding: '1.5rem', backgroundColor: theme.palette.primary.main, height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-
         <Box sx={{ width: {xs: '90%', md: '50%'}, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
           <Box>
             <Wheel players={players} ref={refs} />
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
-              <Button onClick={handleClearplayers}>
-                <Stack>
-                  <IconButton>
-                    <RestartAltIcon sx={{color: 'white'}} />
-                  </IconButton>
-                  <Typography>Reset</Typography>
-                </Stack>
-              </Button>
-              <Button onClick={handleRandom} disabled={players.length <= 1}> 
-                  <Stack>
-                    <IconButton>
-                      <PlayCircleIcon sx={{color: 'white'}} />
-                    </IconButton>
-                    <Typography>Play</Typography>
-                  </Stack>
-              </Button>
-            </Box>
 
+              <IconAndButton onClick={handleClearplayers} disabled={notEnoughPlayer || isSpinning} title={'Restart'} icon={<RestartAltIcon sx={{color: 'white'}} />}/>
+              
+              <IconAndButton onClick={handleRandom} disabled={notEnoughPlayer || isSpinning} title={'Play'} icon={<PlayCircleIcon sx={{color: 'white'}} />}/>
+              
+            </Box>
           </Box>
           <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
             <Box sx={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row'}}>
@@ -219,11 +213,8 @@ function App() {
                   }
                 }}
               />
-              <Button onClick={handleSubmit(handleAdd)}>
-                <IconButton>
-                  <AddCircleOutlineIcon sx={{color: 'white'}} />
-                </IconButton>
-              </Button>
+              <IconAndButton onClick={handleSubmit(handleAdd)} icon={<AddCircleOutlineIcon sx={{color: 'white'}} />}/>
+              
             </Box>
             {winner && (
               <>

@@ -15,14 +15,12 @@ export const PlayersList = ({ players, handleRemovePlayer }) => {
 
    console.log(players)
 
-   const visibleStyles = {
+  const visibleStyles = {
     opacity: 1,
-  
   }
   
-  let hiddenStyles = {
+  const hiddenStyles = {
     opacity: 0,
-  
   }
     
 
