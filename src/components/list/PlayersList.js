@@ -6,7 +6,7 @@ import { ellipsis } from "../../utils/ellipsis";
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 
-export const PlayersList = ({ players, handleRemovePlayer }) => {
+export const PlayersList = ({ players, handleRemovePlayer, isSpinning }) => {
 
    
 
@@ -61,7 +61,7 @@ export const PlayersList = ({ players, handleRemovePlayer }) => {
                                         minWidth: '0'
                                         }
                                     }}>
-                                    <ClearIcon sx={{cursor: 'pointer'}} onClick={() => handleRemovePlayer(index)}/>
+                                    <ClearIcon sx={{cursor: !isSpinning ? 'pointer' : 'auto'}} onClick={() => handleRemovePlayer(index)}/>
                                 </ListItemIcon>
                             </ListItem>
                         </CSSTransition>

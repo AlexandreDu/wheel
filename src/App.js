@@ -65,6 +65,7 @@ function App() {
   }
 
   const handleRemovePlayer = (index) => {
+    if(isSpinning) return
 
     let playersCopy = [...players]
     playersCopy.splice(index, 1)
@@ -257,7 +258,7 @@ function App() {
           </Box> 
         </Box>
         <Box sx={{height: '80%', width: {xs: '90%', sm: '50%', md: '30%'}, overflow: 'auto'}}>
-              <PlayersList players={players} handleRemovePlayer={handleRemovePlayer} />
+              <PlayersList players={players} handleRemovePlayer={handleRemovePlayer} isSpinning={isSpinning} />
         </Box>
       </Box>
       <WinnerDialog 
