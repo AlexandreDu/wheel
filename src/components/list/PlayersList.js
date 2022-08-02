@@ -24,8 +24,6 @@ export const PlayersList = ({ players, handleRemovePlayer, isSpinning }) => {
         <ClassNames>
           {({ css, cx }) => (
             <TransitionGroup component={List}>
-            
-                
                     {players.map(({name, id}, index) => (
                         <CSSTransition key={id} timeout={300} classNames={{
                             appear: css(hiddenStyles),

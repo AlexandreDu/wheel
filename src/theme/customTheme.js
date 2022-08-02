@@ -2,7 +2,6 @@ import { createTheme } from '@mui/material/styles';
 
 let customTheme = createTheme({
   palette: {
-    
     primary: {
       main: '#0069c0',
     },
@@ -13,7 +12,6 @@ let customTheme = createTheme({
       primary: '#fafafafa',
       secondary: 'black'
     },
-    
     status: {
       success: '#49C37D',
       error: '#f9351f'
@@ -29,9 +27,6 @@ let customTheme = createTheme({
       ].join(',')
     }
   },
-
-
-  
   transitions: {
     duration: {
       shortest: 150,
