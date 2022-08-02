@@ -6,7 +6,6 @@ export const IconAndButton = React.forwardRef(({onClick, disabled, icon, title})
 
    
     
-    
 
     return (
     

@@ -23,7 +23,8 @@ let customTheme = createTheme({
     allVariants: {
       color: '#fafafa',
       fontFamily: [
-        'Chilanka',
+        // 'Chilanka',
+        'Luckiest Guy',
         'cursive',
       ].join(',')
     }

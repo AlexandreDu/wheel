@@ -77,6 +77,9 @@ function App() {
 
 
   const handleRandom = () => {
+    //as double security because button are disabled when isSpinning is true 
+    if(isSpinning) return
+    
     setWinner(null)
     setIsSpinning(true)
     setRandom(getRandomInteger(360))
@@ -132,6 +135,12 @@ function App() {
     wheelTl.current.to(wheel, {
       rotation: '+=360',
       ease:Linear.easeNone,
+      duration: 2
+    }, '>')
+
+    wheelTl.current.to(wheel, {
+      rotation: '+=360',
+      ease:Linear.easeNone,
       duration: 2.5
     }, '>')
 
@@ -139,6 +148,12 @@ function App() {
       rotation: '+=360',
       ease:Linear.easeNone,
       duration: 3.5
+    }, '>')
+
+    wheelTl.current.to(wheel, {
+      rotation: '+=360',
+      ease:Linear.easeNone,
+      duration: 4.5
     }, '>')
 
     wheelTl.current.to(wheel, {
@@ -229,7 +244,15 @@ function App() {
                   }
                 }}
               />
-              <IconAndButton onClick={handleSubmit(handleAdd)} icon={<AddCircleOutlineIcon sx={{color: 'white'}} />}/>
+              <IconAndButton 
+                onClick={handleSubmit(handleAdd)} 
+                disabled={isSpinning} 
+                icon={
+                    <AddCircleOutlineIcon 
+                      sx={{color: 'white'}}
+                      />}
+                />
+                    
             </Box>
           </Box> 
         </Box>
