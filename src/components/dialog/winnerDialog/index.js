@@ -16,10 +16,6 @@ export function WinnerDialog({isDialogOpen, setIsDialogOpen, winner}) {
             <DialogContent>
                 <Typography textAlign={'center'} fontSize={'2rem'} color={theme.palette.secondary.main}>{winner}</Typography>
             </DialogContent>
-            {/* <Alert onClose={() => setIsDialogOpen(false)} severity="success">
-                <AlertTitle>The winner is {winner}</AlertTitle>
-                
-            </Alert> */}
         </Dialog>
     )
 

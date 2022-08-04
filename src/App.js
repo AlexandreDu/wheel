@@ -114,54 +114,14 @@ function App() {
       duration: 1,
     })
 
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 0.5
-    })
+    for(let i = 1; i < 6; i++) {
+      wheelTl.current.to(wheel, {
+        rotation: '+=360',
+        ease:Linear.easeNone,
+        duration: i
+      }, '>')
+    }
 
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 0.75
-    }, '>')
-
-
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 1.5
-    }, '>')
-
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 2
-    }, '>')
-
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 2.5
-    }, '>')
-
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 3.5
-    }, '>')
-
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 4.5
-    }, '>')
-
-    wheelTl.current.to(wheel, {
-      rotation: '+=360',
-      ease:Linear.easeNone,
-      duration: 5.5
-    }, '>')
 
  
     let finalRotation = random || 0
