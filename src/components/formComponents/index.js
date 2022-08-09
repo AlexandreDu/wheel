@@ -1,6 +1,6 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
-import { TextField, Typography, Box } from '@mui/material'
+import { TextField, Stack } from '@mui/material'
 import { ErrorMessage } from './errorMessage'
 
 
@@ -33,7 +33,8 @@ export const InputText = ({control, name, label, rules}) => {
                 }
                 
                 return (
-                <>
+                <Stack direction={'column'}>
+
                     <TextField
                         onChange={onChange}
                         value={value}
@@ -44,7 +45,7 @@ export const InputText = ({control, name, label, rules}) => {
                         inputProps={inputProps}
                     />
                     <ErrorMessage error={error} />
-                </>
+                </Stack>
         )}}
         />
     )
