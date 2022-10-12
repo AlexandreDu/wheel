@@ -14,19 +14,17 @@ Front-end:
 - uuidv4@6.2.13
 
 
-
 ## About The Project
 A little web app game where the user adds participants. The participants names are displayed on the wheel and in the participants list where the user can remove them.
-The wheel start to turn when pressing "Play" button. The winner is one closest to the bottom arrow, and his name is displayed in a modal.
-Transition & animations are done with GSAP.
-
+The wheel starts to turn when pressing "Play" button. The winner is the one closest to the bottom arrow, and his name is displayed in a modal.
+Transitions & animations are done with GSAP.
 
 Front-end is deployed on vercel.
 
 Features: 
 - add participants
-- remove one participants in the lsit or remove all with reset button.
-- play the wheel
+- remove one participants in the list or remove all with reset button.
+- turn the wheel
 
 
 ## Contact
