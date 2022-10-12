@@ -17,6 +17,8 @@ Front-end:
 ## About The Project
 A little web app game where the user adds participants. The participants names are displayed on the wheel and in the participants list where the user can remove them.
 The wheel starts to turn when pressing "Play" button. The winner is the one closest to the bottom arrow, and his name is displayed in a modal.
+
+I have used emotion to style the MUI components.
 Transitions & animations are done with GSAP.
 
 Front-end is deployed on vercel.
